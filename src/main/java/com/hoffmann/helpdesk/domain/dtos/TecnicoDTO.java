@@ -24,7 +24,7 @@ private static final long serialVersionUID = 1L;
 	protected LocalDate dataCriacao = LocalDate.now();
 
 	public TecnicoDTO() {
-		
+		addPerfil(Perfil.CLIENTE);
 	}
 	
 	public TecnicoDTO(Tecnico obj) {
@@ -35,6 +35,7 @@ private static final long serialVersionUID = 1L;
 		this.senha = obj.getSenha();
 		this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = obj.getDataCriacao();
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Integer getId() {
