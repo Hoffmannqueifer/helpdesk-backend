@@ -14,6 +14,8 @@ import com.hoffmann.helpdesk.repositories.TecnicoRepository;
 import com.hoffmann.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.hoffmann.helpdesk.services.exceptions.ObjectNotFoundException;
 
+import jakarta.validation.Valid;
+
 @Service
 public class TecnicoService {
 	
@@ -49,5 +51,13 @@ public class TecnicoService {
 		if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
 			throw new DataIntegrityViolationException("E-mail já cadastrado no sistema");
 		}
+	}
+	
+	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
+		objDTO.setId(id);
+		Tecnico updObj = findById(id);
+		validaPorCpfEEmail(objDTO);
+		updObj = new Tecnico(objDTO);
+		return tecnicoRepository.save(updObj);
 	}
 }
