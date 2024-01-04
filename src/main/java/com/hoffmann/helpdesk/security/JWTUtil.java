@@ -20,7 +20,7 @@ public class JWTUtil {
 
 	public String generateToken(String email) {
 		return Jwts.builder().setSubject(email).setExpiration(new Date(System.currentTimeMillis() + expiration))
-				.signWith(SignatureAlgorithm.ES512, secret.getBytes())
+				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
 				.compact();
 	}
 }
